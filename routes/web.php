@@ -16,15 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::prefix('post')->group(function () {
     Route::get('/create', [PostController::class, 'create'])->middleware(['auth'])->name('post.create');
+    Route::post('/create', [PostController::class, 'store'])->middleware(['auth'])->name('post.store');
 });
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [PostController::class, 'postsByUser'])->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
