@@ -10,14 +10,14 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with('author')->sortByPublished();
 
         return view('posts.index', compact('posts'));
     }
 
     public function postsByUser()
     {
-        $posts = Post::where('user_id', Auth::id())->latest()->get();
+        $posts = Post::where('user_id', Auth::id())->sortByPublished();
 
         return view('dashboard', compact('posts'));
 
