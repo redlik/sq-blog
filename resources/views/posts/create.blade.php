@@ -32,7 +32,7 @@
 
                         <div class="flex items-center justify-start mt-4">
 
-                            <x-button class="bg-green-700 font-bold">
+                            <x-button class="bg-indigo-600 font-bold">
                                 {{ __('Publish') }}
                             </x-button>
                         </div>
