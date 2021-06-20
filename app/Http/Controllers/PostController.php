@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('author')->sortByPublished();
+        $posts = Post::with('author')->orderBy('publication_date', 'DESC')->paginate(25);
 
         return view('posts.index', compact('posts'));
     }
