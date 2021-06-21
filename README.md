@@ -24,7 +24,7 @@ To initialise the app, make sure the local machine has mySQL server running, and
 - run `php artisan migrate` to setup database's table and columns
 - use `php artisan serve` to start web server and view the homepage of the app in the browser
 
-###App features
+### App features
 
 The app provides the following functionality:
 - User authentication. User can register and login to the app to create posts
@@ -32,7 +32,7 @@ The app provides the following functionality:
 - Users can create new posts using dedicated page
 - Homepage of the app shows all posts, ordered by the date of publication
 
-###External feed
+### External feed
 
 - The application reads data from external API point and saves the posts in the database under username `admin`
 - To initalise the feed go to `/initialise` URL which will do the following:
@@ -41,13 +41,13 @@ The app provides the following functionality:
 - For automatic feeding, the admin of the application can run `php artisan schedule:work` which will pull data from 
   the API every hour, same as the `/initialise` procedure    
 
-###Security
+### Security
 
 - The app uses Laravel Breeze package for user registration and authentication
 - Parts of the app only accessible to authenticated users are blocked from guest visitors using `middleware`
 - User accessed url were tested in unit test
 
-###Optimisation
+### Optimisation
 
 - The app uses eager loading to limit the number of database calls
 - Should the application grow in popularity I recommend hosting on dedicated virtual server (DigitalOcean, Linode, 
@@ -55,7 +55,7 @@ The app provides the following functionality:
 - All static files should be hosted from dedicated Amazon S3 container
 - For extra capacity I would recommend using dedicated CDN solution, such as Cloudflare
 
-###Testing
+### Testing
 
 The application was tested both manually, in the browser and using PHPUnit testing:
 
@@ -64,12 +64,14 @@ The application was tested both manually, in the browser and using PHPUnit testi
 - New Post form has validation enabled to make sure the data is present and in correct format
 - External feed is pulling data, which is saved in DB and shows on the main feed
 
-####Unit Testing
+#### Unit Testing
+
 - Homepage is accessible with status 200
 - Dashboard is not accessible to guest user, status 302
 - Sample post is saved to test DB and visible on the home feed
 
-####External feed validation
+#### External feed validation
+
 - The command that reads the data from external API is placed inside `try catch` block to make sure the app doesn't 
   crash if the feed fails
 - In case of the failure the error message is display above the feed
