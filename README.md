@@ -16,6 +16,7 @@ To install SQ Blog on a local machine follow these steps:
 - For production environment use `npm run prod` to compile modules and stylesheet optimised
 
 ### Initialisation
+
 To initialise the app, make sure the local machine has mySQL server running, and follow these steps:
 - duplicate `.env.example` file and rename it to `.env`
 - run `php artisan key:generate` to create new security key
@@ -24,6 +25,7 @@ To initialise the app, make sure the local machine has mySQL server running, and
 - use `php artisan serve` to start web server and view the homepage of the app in the browser
 
 ###App features
+
 The app provides the following functionality:
 - User authentication. User can register and login to the app to create posts
 - User have a dashboard panel where they can see all their posts created so far
@@ -31,6 +33,7 @@ The app provides the following functionality:
 - Homepage of the app shows all posts, ordered by the date of publication
 
 ###External feed
+
 - The application reads data from external API point and saves the posts in the database under username `admin`
 - To initalise the feed go to `/initialise` URL which will do the following:
     - Create a new user called `admin`, if it doesn't exist yet
@@ -38,4 +41,37 @@ The app provides the following functionality:
 - For automatic feeding, the admin of the application can run `php artisan schedule:work` which will pull data from 
   the API every hour, same as the `/initialise` procedure    
 
-###External feed
+###Security
+
+- The app uses Laravel Breeze package for user registration and authentication
+- Parts of the app only accessible to authenticated users are blocked from guest visitors using `middleware`
+- User accessed url were tested in unit test
+
+###Optimisation
+
+- The app uses eager loading to limit the number of database calls
+- Should the application grow in popularity I recommend hosting on dedicated virtual server (DigitalOcean, Linode, 
+  AWS) with Laravel Forge as an easy deployment tool
+- All static files should be hosted from dedicated Amazon S3 container
+- For extra capacity I would recommend using dedicated CDN solution, such as Cloudflare
+
+###Testing
+
+The application was tested both manually, in the browser and using PHPUnit testing:
+
+- I've tested user registration and login
+- Logged in user was able to create new posts
+- New Post form has validation enabled to make sure the data is present and in correct format
+- External feed is pulling data, which is saved in DB and shows on the main feed
+
+####Unit Testing
+- Homepage is accessible with status 200
+- Dashboard is not accessible to guest user, status 302
+- Sample post is saved to test DB and visible on the home feed
+
+####External feed validation
+- The command that reads the data from external API is placed inside `try catch` block to make sure the app doesn't 
+  crash if the feed fails
+- In case of the failure the error message is display above the feed
+- After each connection the function will generate a success message to be shown in the same spot
+- For production environment the messages should be sent to Laravel log or via Notification to dedicated admin
