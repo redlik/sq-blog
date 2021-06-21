@@ -40,6 +40,9 @@ The app provides the following functionality:
     - Pull data from external API point and save it under `admin` user
 - For automatic feeding, the admin of the application can run `php artisan schedule:work` which will pull data from 
   the API every hour, same as the `/initialise` procedure    
+- The feed process is sent to queue to make sure the app doesn't freeze while reading the API
+- Local version uses DB queue driver, for production I would recommend separate Redis server to be used  
+- For production environment I would recommend creating a cron job on the server that runs the command every hour
 
 ### Security
 
