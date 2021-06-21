@@ -23,6 +23,7 @@ Route::prefix('post')->group(function () {
     Route::get('/create', [PostController::class, 'create'])->middleware(['auth'])->name('post.create');
     Route::post('/create', [PostController::class, 'store'])->middleware(['auth'])->name('post.store');
     Route::get('/index', [PostController::class, 'index'])->middleware(['auth'])->name('post.index');
+    Route::get('/{id}', [PostController::class, 'show'])->name('post.show');
 
 });
 

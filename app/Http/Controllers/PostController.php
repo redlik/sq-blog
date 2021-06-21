@@ -28,6 +28,13 @@ class PostController extends Controller
         return view('posts.create');
     }
 
+    public function show($id)
+    {
+        $post = Post::find($id);
+
+        return view('posts.show', compact('post'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
