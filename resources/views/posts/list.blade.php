@@ -1,8 +1,10 @@
-<div class="flex justify-between align-middle h-16 hover:bg-gray-100 p-4 rounded border-b border-gray-200">
-    <div>
+<div class="flex justify-between items-center hover:bg-gray-100 px-4 py-6 md:py-4 rounded border-b border-gray-200">
+    <div class="hover:underline hover:text-gray-600">
+        <a href="{{ route('post.show', ['id' => $post->id]) }}">
         {{ $post->title }}
+        </a>
     </div>
-    <div class="text-sm text-gray-500">
-        Created on: {{ $post->publication_date }}
+    <div class="text-sm text-gray-500 text-right">
+        <span class="invisible md:visible">Created on: </span>{{ $post->publication_date }}
     </div>
 </div>

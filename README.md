@@ -14,7 +14,8 @@ To install SQ Blog on a local machine follow these steps:
   will run from
 - Run `composer install` command to install all necessary PHP packages
 - Run `npm install && npm run dev` to install and compile all Javascript modules and Tailwind CSS style sheet
-- For production environment use `npm run prod` to compile modules and stylesheet optimised
+- For production environment use `npm run prod` to compile modules and stylesheet optimised and don't forget to 
+  change debug flag in `.env` to `false` 
 
 ### Initialisation
 
