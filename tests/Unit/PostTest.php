@@ -35,4 +35,15 @@ class PostTest extends TestCase
         $response->assertSee($post->title);
 
     }
+
+    public function test_if_posts_has_single_page()
+    {
+        $post = Post::factory()->create();
+
+        $response = $this->get('/post/'.$post->id);
+
+        $response->assertStatus(200);
+        $response->assertSee($post->title);
+
+    }
 }
